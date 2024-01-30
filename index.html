@@ -9,20 +9,56 @@
 <body>
     
     <h1 class="nav-title">Alex Quiton - CIS367 Project Webpage</h1>
-    <div class="nav-line">
-        <li>
-            <section class="drop-list">
-                <h2>Assignments</h2>
-                <ul >
-                    <li>
-                        <a href="InClassA/A1/index.html">Triangle</a>
-                    </li>
-                    <li>
-                        <a href="Homework/hw1/gasket1-quiton.html">Gasket1</a>
-                    </li>
-                </ul>
-            </section>
-        </li>
+    <div class="nav-line"> </div>
+    <div class="container">
+        <div class="console" id="console">console</div>
+        <span>alexquiton:/$  </span><span><input type="text" placeholder="" size="50" spellcheck="false" id="txtInputData"></span>
+
+
+        <div class="hidden" id="home">
+            <p>Welcome To My Portfolio</p>
+            <p>Type 'help' + ENTER -- for available commands.</p>
+        </div>
+
+        <div class="hidden" id="help">
+            <p>»Help?</p>
+            <p>Type [command] + ENTER</p>
+            <ul>
+                <li> 'home'</li>
+                <li> 'help'</li>
+                <li> 'assignments'</li>
+                <li> 'homework'</li>
+            </ul>
+        </div>
+
+        <div class="hidden" id="unknown">
+            <span>Command Not Found : </span><span class="unknown-command" id="unknown-command"></span>
+            <p>Type 'help' + ENTER -- for available commands.</p>
+            <p> ¯\_(⊙︿⊙)_/¯ </p>
+        </div>
+
+        <div class="hidden" id="assignments">
+            <p>Assignments</p>
+            <ul>
+                <li>
+                    <a href="InClassA/A1/index.html">Triangle 'Click Me'</a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="hidden" id="homework">
+            <p>Homework</p>
+            <ul>
+                <li>
+                    <a href="Homework/hw1/gasket1-quiton.html">Gasket1 'Click Me'</a>
+                </li>
+            </ul>
+        </div>
+
+
+
+
     </div>
 </body>
+<script src="script.js"></script>
 </html>
