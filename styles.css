@@ -1,4 +1,95 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@1,100&display=swap');
+
+
+body {
+    background-color: #131316;
+    color: #ffffff;
+    font-family: 'Poppins', sans-serif;
+    padding: 0;
+    margin: 0;
+
+}
+
 h1 {
     text-align: center;
     font-weight: bold;
 }
+
+section {
+    display: grid;
+    place-items: center;
+    align-content: center;
+}
+
+h2 {
+    margin: 0%;
+    
+}
+
+ul {
+    padding: 0%;
+    margin: 0%;
+}
+
+li {
+    list-style-type: none;
+}
+
+a {
+    color: white;
+    text-decoration: none;
+}
+
+.drop-list {
+    opacity: 0;
+    animation-delay: 1s;
+    animation-name: show-list;
+    animation-duration: 1s;
+    animation-fill-mode: both;
+}
+
+@keyframes show-list{
+    from { 
+        opacity: 0;
+        filter: blur(5px);
+        transform: translateY(-25%);
+    }
+
+    to {
+        opacity: 1;
+        filter: blur(0);
+        transform: translateY(0);
+    }
+}
+
+.nav-line{
+    height: 1px;
+    background: white;
+    width: 50%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row; 
+    animation-name: show-nav;
+    animation-duration: 1s;
+}
+
+@keyframes show-nav{
+    from {width: 0%;}
+    to {width: 50%;}
+}
+
+.hidden {
+    opacity: 0;
+    filter: blur(5px);
+    transform: translateY(-25%);
+    transition: all 1s;
+}
+
+.show {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateY(0);
+}
+
+
+
