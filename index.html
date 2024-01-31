@@ -12,28 +12,35 @@
     <div class="nav-line"> </div>
     <div class="container">
         <div class="console" id="console">console</div>
-        <span>alexquiton:/$  </span><span><input type="text" placeholder="" size="50" spellcheck="false" id="txtInputData"></span>
+        <span>vistor@github.com:~$  </span><span><input type="text" placeholder="" size="50" spellcheck="false" id="txtInputData"></span>
 
 
         <div class="hidden" id="home">
-            <p>Welcome To My Portfolio</p>
-            <p>Type 'help' + ENTER -- for available commands.</p>
+            <pre>        
+    ___    __             ____        _ __            
+    /   |  / /__  _  __   / __ \__  __(_) /_____  ____ 
+   / /| | / / _ \| |/_/  / / / / / / / / __/ __ \/ __ \
+  / ___ |/ /  __/>  <   / /_/ / /_/ / / /_/ /_/ / / / /
+ /_/  |_/_/\___/_/|_|   \___\_\__,_/_/\__/\____/_/ /_/ 
+                                                        
+            </pre>
+            <p class="helper-prompt">Type 'help' + ENTER -- for available commands.</p>
         </div>
 
         <div class="hidden" id="help">
             <p>»Help?</p>
             <p>Type [command] + ENTER</p>
             <ul>
-                <li> 'home'</li>
-                <li> 'help'</li>
-                <li> 'assignments'</li>
-                <li> 'homework'</li>
+                <li><b>home</b>    &nbsp;&nbsp;<span class="description"> Displays welcome screen</span></li>
+                <li><b>help</b>    &nbsp;&nbsp;<span class="description"> Think you already know what does this</span> </li>
+                <li><b>assignments</b>   &nbsp;&nbsp;<span class="description"> Display links to in class assignments</span></li>
+                <li><b>homework</b>   &nbsp;&nbsp;<span class="description"> Display links to homework</span></li>
             </ul>
         </div>
 
         <div class="hidden" id="unknown">
             <span>Command Not Found : </span><span class="unknown-command" id="unknown-command"></span>
-            <p>Type 'help' + ENTER -- for available commands.</p>
+            <p class="helper-prompt">Type 'help' + ENTER -- for available commands.</p>
             <p> ¯\_(⊙︿⊙)_/¯ </p>
         </div>
 
@@ -41,7 +48,7 @@
             <p>Assignments</p>
             <ul>
                 <li>
-                    <a href="InClassA/A1/index.html">Triangle 'Click Me'</a>
+                    <a href="InClassA/A1/index.html">Triangle <span class="description"> Click Me</span></a>
                 </li>
             </ul>
         </div>
@@ -50,7 +57,7 @@
             <p>Homework</p>
             <ul>
                 <li>
-                    <a href="Homework/hw1/gasket1-quiton.html">Gasket1 'Click Me'</a>
+                    <a href="Homework/hw1/gasket1-quiton.html">Gasket1 <span class="description"> Click Me</span></a>
                 </li>
             </ul>
         </div>

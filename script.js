@@ -27,23 +27,22 @@ function showText(target_id, message, index, interval) {
 
 let home = document.getElementById("home").innerHTML;
 
- showText("console",home, 0, 15)
+ showText("console",home, 0, 1)
 
  function enterCommand(input){
     let commands = ["home", "help", "assignments", "homework"]
     if(commands.includes(input)){
         var command = document.getElementById(input).innerHTML;
-        showText("console", command, 0, 15);
+        showText("console", command, 0, 1);
     }else{
         document.getElementById("unknown-command").innerHTML = input
         var command = document.getElementById("unknown").innerHTML;
-        showText("console", command, 0, 15);
+        showText("console", command, 0, 1);
         
         
       
     }
  }
 
- //<input type="text" placeholder="" size="50" id="txtInputData">
 
   

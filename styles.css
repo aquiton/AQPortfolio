@@ -15,18 +15,31 @@ h1 {
     font-weight: bold;
 }
 
+pre {
+    color: #14e5ff
+}
+
 a {
-    color: #33FF33;
+    color: #FFB000;
     text-decoration: none;
 }
 
 li {
     list-style-type:none;
+   
 }
 
-li::before {
-    content: "-";
+b {
+    color: #FF61a8;
+    text-shadow: 2px 2px 7px #FF61a8;
+}
 
+.description {
+    color: #14e5ff;
+}
+
+.helper-prompt {
+    opacity: 0.5;
 }
 
 .nav-line{
