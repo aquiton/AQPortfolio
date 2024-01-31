@@ -34,13 +34,11 @@ let home = document.getElementById("home").innerHTML;
     if(commands.includes(input)){
         var command = document.getElementById(input).innerHTML;
         showText("console", command, 0, 1);
+        document.getElementById("txtInputData").value = ''
     }else{
         document.getElementById("unknown-command").innerHTML = input
         var command = document.getElementById("unknown").innerHTML;
         showText("console", command, 0, 1);
-        
-        
-      
     }
  }
 
