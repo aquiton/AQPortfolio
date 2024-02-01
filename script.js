@@ -1,7 +1,7 @@
 function showText(target_id, message, index, interval) {
     if(index < message.length){
         document.getElementById(target_id).innerHTML = (message.substring(0,index++));
-        //console.log(document.getElementById(target_id).innerHTML);
+   
         setTimeout(function () { showText(target_id,message,index,interval) }, interval);
     }
 
