@@ -34,6 +34,11 @@ b {
     text-shadow: 2px 2px 7px #FF61a8;
 }
 
+a > b {
+    color: #FFB000;
+    text-shadow: 2px 2px 7px #FFB000
+}
+
 .description {
     color: #14e5ff;
 }

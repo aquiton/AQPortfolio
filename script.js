@@ -39,6 +39,7 @@ let home = document.getElementById("home").innerHTML;
         document.getElementById("unknown-command").innerHTML = input
         var command = document.getElementById("unknown").innerHTML;
         showText("console", command, 0, 1);
+        document.getElementById("txtInputData").value = ''
     }
  }
 
