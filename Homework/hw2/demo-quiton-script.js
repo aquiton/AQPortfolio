@@ -1,5 +1,9 @@
 var gl;
 var points;
+let x = 0.0;
+let y = 0.0;
+let xLoc, yLoc;
+let dirs = [null, null]; //horizontal, vertical
 
 // This function executes our WebGL code AFTER the window is loaded.
 // Meaning, that we wait for our canvas element to exist.
@@ -26,6 +30,9 @@ window.onload = function init() {
   var program = initShaders(gl, 'vertex-shader', 'fragment-shader');
   gl.useProgram(program);
 
+  xLoc = gl.getUniformLocation(program, "x");
+  yLoc = gl.getUniformLocation(program, "y");
+
   // load data into GPU
   var bufferID = gl.createBuffer();
   gl.bindBuffer(gl.ARRAY_BUFFER, bufferID);
@@ -41,8 +48,22 @@ window.onload = function init() {
     "keydown",
     function (e) {
       console.log("Key: " + e.key);
+      if(e.key == "ArrowLeft"){
+        dirs[0] = false;
+      }else if (e.key == "ArrowRight"){
+        dirs[0] = true;
+      }else if (e.key == "ArrowUp") {
+        dirs[1] = true;
+      }else if (e.key == "ArrowDown"){
+        dirs[1] = false;
+      }else if (e.key == " "){
+        dirs[0] = null;
+        dirs[1] = null;
+      }
     },
     false
+
+
   );
 
 };
@@ -51,5 +72,27 @@ window.onload = function init() {
 function render() {
   gl.clear(gl.COLOR_BUFFER_BIT);
   gl.drawArrays(gl.TRIANGLES, 0, 3);
+  // x += 0.1;
+  // y += 0.1;
+  gl.uniform1f(xLoc, x);
+  gl.uniform1f(yLoc, y);
+
+  if (dirs[0] === true) // move right
+  {
+    x += 0.01;
+  }else if (dirs[0] === false) //move left
+  {
+    x -= 0.01;
+  }
+  
+  if (dirs[1] === true) //move up
+  {
+    y += 0.01;
+  }else if (dirs[1] === false) // move down
+  {
+    y -= 0.01;
+  }
+
+  window.requestAnimationFrame(render);
 }
 
