@@ -17,9 +17,9 @@ window.onload = function init() {
 
   // triangle vertices
   var vertices = [
-    vec2(-1, 1),
-    vec2(0, 1),
-    vec2(1, -1)
+    vec2(0.5, 0),
+    vec2(0, 0.5),
+    vec2(-0.5, 0)
   ];
 
   // configure WebGL
