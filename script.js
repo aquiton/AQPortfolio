@@ -1,6 +1,6 @@
 function showText(target_id, message, index, interval) {
     if(index < message.length){
-        document.getElementById(target_id).innerHTML = (message.substring(0,index++));
+        document.getElementById(target_id).innerHTML = (message.substring(0,index+= 8));
    
         setTimeout(function () { showText(target_id,message,index,interval) }, interval);
     }
@@ -33,7 +33,7 @@ let home = document.getElementById("home").innerHTML;
     let commands = ["home", "help", "assignments", "homework"]
     if(commands.includes(input)){
         var command = document.getElementById(input).innerHTML;
-        showText("console", command, 0, 1);
+        showText("console", command, 0, 0);
         document.getElementById("txtInputData").value = ''
     }else{
         document.getElementById("unknown-command").innerHTML = input
