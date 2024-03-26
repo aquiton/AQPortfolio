@@ -1,5 +1,5 @@
 {
-  "name": "fallingsand",
+  "name": "atoms",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -9,6 +9,11 @@
     "preview": "vite preview"
   },
   "devDependencies": {
-    "vite": "^5.1.4"
+    "vite": "^5.1.6"
+  },
+  "dependencies": {
+    "@pixi/filter-glow": "^5.2.1",
+    "pixi-filters": "^6.0.0",
+    "pixi.js": "^8.0.1"
   }
 }

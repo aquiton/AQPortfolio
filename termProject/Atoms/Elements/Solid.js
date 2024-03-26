@@ -1,15 +1,13 @@
 import Element from "./Element";
 
 class Solid extends Element {
-  //
   constructor() {
     super();
-    if (this.constructor == Solid) {
-      throw new error("Abstract classes can't be instantiated");
-    }
   }
 
-  
+  step(grid, row, col, ROWS) {
+    grid[row][col] = this;
+  }
 }
 
 export default Solid;
