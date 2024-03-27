@@ -39,7 +39,7 @@
     grass.wrapS = THREE.RepeatWrapping;
     grass.wrapT = THREE.RepeatWrapping;
     grass.repeat.set(floorWidth / 2, floorHeight / 2);
-    let stone = textureLoader.load('stone wall 4.png');
+    let stone = textureLoader.load('stonewall4.png');
     stone.wrapS = THREE.RepeatWrapping;
     stone.wrapT = THREE.RepeatWrapping;
     stone.repeat.set(boxWidth / 2, boxHeight / 2);
@@ -101,12 +101,12 @@
 
 
     function animate() {
-    
+        requestAnimationFrame( animate );
         for(let i = 0; i < boxes.length; i++) 
         {
             boxes[i].rotateX(Math.PI/(100+i));
         }
-       requestAnimationFrame( animate );
+      
         renderer.render( scene, camera );
         
        
