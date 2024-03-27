@@ -1,8 +1,14 @@
-import * as PIXI from "pixi.js";
+<!doctype html>
+<html>
+  <head>
+    <script src="https://pixijs.download/release/pixi.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <script type="module">
+      const app = new PIXI.Application();
 
-const app = new PIXI.Application();
-
-app
+      app
   .init({
     width: 500,
     height: 500,
@@ -72,3 +78,8 @@ app
       });
     });
   });
+
+
+    </script>
+  </body>
+</html>
