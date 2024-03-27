@@ -8,8 +8,16 @@
         padding: 0px;}
     </style>
     <script async src="https://unpkg.com/es-module-shims@1.6.3/dist/es-module-shims.js"></script>
-    <script type="importmap">{"imports": {"three": "https://unpkg.com/three@latest/build/three.module.js"}}</script>
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://unpkg.com/three@latest/build/three.module.js"
+            }
+        }
+    
+    </script>
     <script type="module">
+        
     import * as THREE from 'three';
     const scene = new THREE.Scene();
 
@@ -92,7 +100,8 @@
     }
 
 
-    function animate() {requestAnimationFrame( animate );
+    function animate() {
+    
         for(let i = 0; i < boxes.length; i++) 
         {
             boxes[i].rotateX(Math.PI/(100+i));
