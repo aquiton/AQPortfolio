@@ -19,7 +19,6 @@
     <script type="module">
         
     import * as THREE from 'three';
-    import { OrbitControls } from '/three/addons/controls/OrbitControls.js';
     const scene = new THREE.Scene();
 
     let boxes = [];
@@ -28,17 +27,7 @@
     const near = 0.1;
     const far = 10;
     const camera = new THREE.PerspectiveCamera( fov, window.innerWidth /window.innerHeight, near, far );
-
     const renderer = new THREE.WebGLRenderer();renderer.setSize( window.innerWidth, window.innerHeight );
-
-    const controls = new OrbitControls( camera, renderer.domElement );
-
-//controls.update() must be called after any manual changes to the camera's transform
-    camera.position.set( 0, 20, 100 );
-    controls.update();
-
-
-
     
     let floorWidth = 20;
     let floorHeight = 40;
@@ -76,10 +65,12 @@
     // scene.add(boxMesh);
 
     //torus
-    const geometry = new THREE.TorusGeometry( 10, 3, 16, 100 ); 
-    const material = new THREE.MeshBasicMaterial( { color: 0xffff00 } ); 
-    const torus = new THREE.Mesh( geometry, material ); 
-    scene.add( torus );
+    let geometry = new THREE.TorusGeometry( 1, 0.5, 8, 50 ); 
+    let material = new THREE.MeshBasicMaterial( { color: 0xffff00 } ); 
+    let torus = new THREE.Mesh( geometry, material ); 
+    torus.position.z = -7;
+    torus.position.y = 5
+    scene.add(torus);
  
 
 
@@ -124,11 +115,11 @@
         {
             boxes[i].rotateX(Math.PI/(10+i));
         }
+        torus.rotateX(Math.PI/(100))
+        torus.rotateY(Math.PI/(50))
+        torus.rotateZ(Math.PI/(75))
       
-        controls.update();
         renderer.render( scene, camera );
-    
-
         
        
     }
