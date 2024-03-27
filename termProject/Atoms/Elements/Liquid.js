@@ -104,7 +104,7 @@ class Liquid extends Element {
       if (bottomLeftCell == 0 && dir < 0) {
         grid[row][col] = 0;
         grid[row - 1][col + 1] = this;
-      } else if (bottomRightCell == 0 && dir < 0) {
+      } else if (bottomRightCell == 0 && dir > 0) {
         grid[row][col] = 0;
         grid[row + 1][col + 1] = this;
       } else if (leftCell == 0 && dir < 0) {
@@ -113,9 +113,9 @@ class Liquid extends Element {
       } else if (rightCell == 0 && dir > 0) {
         grid[row][col] = 0;
         grid[row + rightSpread][col] = this;
+      } else {
+        grid[row][col] = this;
       }
-    } else {
-      grid[row][col] = this;
     }
   }
 }
