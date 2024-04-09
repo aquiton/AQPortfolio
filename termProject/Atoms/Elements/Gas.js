@@ -6,7 +6,6 @@ import Solid from "./Solid";
 class Gas extends Element {
   constructor() {
     super();
-    this.density = 0;
     this.spread = 2;
     this.has_been_updated = false;
   }

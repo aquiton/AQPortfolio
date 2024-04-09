@@ -4,8 +4,6 @@ import Solid from "./Solid";
 class MoveAbleSolid extends Solid {
   constructor() {
     super();
-    this.id = 1;
-    this.life_time = 100;
     this.velocity = 5;
     this.has_been_updated = false;
   }

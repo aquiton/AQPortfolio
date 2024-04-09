@@ -5,7 +5,6 @@ class Element {
     if (this.constructor == Element) {
       throw new error("Abstract classes can't be instantiated");
     }
-    this.id;
     this.life_time = 100;
     this.temperature = 32;
     this.velocity;

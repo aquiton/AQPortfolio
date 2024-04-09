@@ -4,12 +4,9 @@ import Solid from "./Solid";
 class Liquid extends Element {
   constructor() {
     super();
-    this.id = 2;
-    this.life_time = 100;
     this.velocity = 5;
     this.spread = 5;
     this.color = 0x2389da;
-    this.has_been_updated = false;
   }
 
   calculateSpread(grid, row, col, dir) {
