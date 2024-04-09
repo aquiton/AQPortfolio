@@ -12,72 +12,54 @@ class Liquid extends Element {
     this.has_been_updated = false;
   }
 
-  calculateGravity(grid, row, col) {
-    let i;
-    for (i = 1; i < this.velocity; i++) {
-      if (grid[row][col + i] != 0) {
-        if (i == 1) {
-          return 1;
-        } else {
-          return i - 1;
-        }
-      }
-    }
-    return i;
-  }
-
   calculateSpread(grid, row, col, dir) {
-    let i;
-    if (dir > 0) {
-      for (i = 1; i < this.spread; i++) {
-        if (grid[row + i][col] instanceof Solid) {
-          if (i == 1) {
-            return 1;
-          } else {
-            return i - 1;
-          }
-        }
+    const maxSpread = this.spread;
+    let step = 1;
+    while (step < maxSpread) {
+      const nextRow = row + step * dir;
+      if (
+        nextRow < 0 ||
+        nextRow >= grid.length ||
+        grid[nextRow][col] instanceof Solid
+      ) {
+        break; // Stop spreading if element object encountered or out of bounds
       }
-    } else {
-      for (i = 1; i < this.spread; i++) {
-        if (grid[row - i][col] instanceof Solid) {
-          if (i == 1) {
-            return 1;
-          } else {
-            return i - 1;
-          }
-        }
-      }
+      step++;
     }
-
-    return i;
+    return Math.max(1, step - 1); // Ensure at least one step, and subtract 1 as the index is zero-based
   }
 
   step(grid, row, col, ROWS) {
     //cell directly under
+
     let gravity = this.calculateGravity(grid, row, col);
     let targetCell = grid[row][col + gravity];
     let bottomLeftCell = grid[row - 1][col + 1];
     let bottomRightCell;
     let leftSpread, rightSpread;
-    let leftCell;
-    let rightCell;
+    let leftCell, rightCell;
 
+    //random direction
+    let dir = 1;
+    if (Math.random(1) < 0.5) {
+      dir *= -1;
+    }
+
+    //checks
     if (row < ROWS - 1) {
       bottomRightCell = grid[row + 1][col + 1];
     }
 
     let righBound = ROWS - this.spread;
 
-    if (row < righBound && row > this.spread) {
+    if (row < ROWS - this.spread && row > this.spread) {
       //  rightSpread
-      rightSpread = this.calculateSpread(grid, row, col, 1);
 
+      rightSpread = this.calculateSpread(grid, row, col, 1);
       rightCell = grid[row + rightSpread][col];
 
       //leftSpread
       leftSpread = this.calculateSpread(grid, row, col, -1);
-
       leftCell = grid[row - leftSpread][col];
     } else if (row > righBound && row < ROWS - 1) {
       leftSpread = 5;
@@ -89,12 +71,6 @@ class Liquid extends Element {
       leftCell = grid[row - leftSpread][col];
       rightSpread = 5;
       rightCell = grid[row + rightSpread][col];
-    }
-
-    //random direction
-    let dir = 1;
-    if (Math.random(1) < 0.5) {
-      dir *= -1;
     }
 
     if (targetCell == 0) {

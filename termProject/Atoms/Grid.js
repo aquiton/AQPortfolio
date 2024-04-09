@@ -1,7 +1,7 @@
 import * as PIXI from "pixi.js";
 import MovableSolid from "./Elements/MovableSolid";
-import Sand from "./Elements/Sand";
-import Water from "./Elements/Water";
+import Sand from "./Elements/MovableSolids/Sand";
+import Water from "./Elements/Liquids/Water";
 class Grid {
   constructor(rows, cols, spacer) {
     this.gridRows = rows;
@@ -42,23 +42,12 @@ class Grid {
   }
 
   updateGrid(Graphics) {
-    Graphics.clear();
-    //debug
-    let sandCounter = 0;
-    let waterCounter = 0;
-
     for (let i = this.gridRows - 1; i > 0; i--) {
       for (let j = this.gridCols - 1; j > 0; j--) {
         let state = this.grid[i][j];
         if (state != 0) {
           state.step(this.grid, i, j, this.gridRows);
           state.draw(Graphics, i, j, this.spacer);
-          // Graphics.rect(
-          //   i * this.spacer,
-          //   j * this.spacer,
-          //   this.spacer,
-          //   this.spacer
-          // ).fill(state.color);
         }
       }
     }

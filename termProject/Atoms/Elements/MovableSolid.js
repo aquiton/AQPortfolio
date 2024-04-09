@@ -10,20 +10,6 @@ class MoveAbleSolid extends Solid {
     this.has_been_updated = false;
   }
 
-  calculateGravity(grid, row, col) {
-    let i;
-    for (i = 1; i < this.velocity; i++) {
-      if (grid[row][col + i] != 0) {
-        if (i == 1) {
-          return 1;
-        } else {
-          return i - 1;
-        }
-      }
-    }
-    return i;
-  }
-
   step(grid, row, col, ROWS) {
     //cell directly under
     let gravity = this.calculateGravity(grid, row, col);
@@ -41,6 +27,8 @@ class MoveAbleSolid extends Solid {
       dir *= -1;
     }
 
+    //console.log(this.actOnOther());
+
     if (targetCell == 0) {
       grid[row][col] = 0;
       grid[row][col + gravity] = this;
@@ -57,8 +45,6 @@ class MoveAbleSolid extends Solid {
         grid[row][col] = 0;
         grid[row + 1][col + 1] = this;
       }
-    } else {
-      grid[row][col] = this;
     }
   }
 }

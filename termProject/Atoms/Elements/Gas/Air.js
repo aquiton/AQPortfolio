@@ -1,4 +1,4 @@
-import Gas from "./Gas";
+import Gas from "../Gas";
 
 class Air extends Gas {
   constructor() {

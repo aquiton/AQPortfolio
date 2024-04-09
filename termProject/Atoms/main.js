@@ -1,11 +1,13 @@
 import * as PIXI from "pixi.js";
 import Grid from "./Grid.js";
-import Sand from "./Elements/Sand.js";
-import Water from "./Elements/Water.js";
-import Stone from "./Elements/Stone.js";
-import Air from "./Elements/Air.js";
+import Sand from "./Elements/MovableSolids/Sand.js";
+import Water from "./Elements/Liquids/Water.js";
+import Stone from "./Elements/Solids/Stone.js";
+import Air from "./Elements/Gas/Air.js";
+import Ember from "./Elements/MovableSolids/Embers.js";
 
 const app = new PIXI.Application();
+
 app
   .init({
     width: 500,
@@ -83,7 +85,8 @@ app
                 element = new Air();
                 grid.addPixel(row, col, element);
               } else {
-                //FIRE
+                element = new Ember();
+                grid.addPixel(row, col, element);
               }
             }
           }
@@ -94,14 +97,20 @@ app
     // Add it to the stage to render
     const graphics = new PIXI.Graphics();
 
+    const gridTexture = app.renderer.generateTexture(graphics);
+
     app.stage.addChild(bg);
 
     app.stage.addChild(graphics);
 
-    app.ticker.add((delta) => {
+    app.ticker.add(animate);
+
+    function animate() {
+      graphics.clear();
       grid.updateGrid(graphics);
-      console.log("Water Count : " + grid.getElementCount(Water));
+
+      //console.log("Water Count : " + grid.getElementCount(Water));
       // console.log("Sand Count : " + grid.getElementCount(Sand));
       //console.log("Air Count : " + grid.getElementCount(Air));
-    });
+    }
   });

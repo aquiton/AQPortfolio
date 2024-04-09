@@ -1,4 +1,4 @@
-import Liquid from "./Liquid";
+import Liquid from "../Liquid";
 
 class Water extends Liquid {
   constructor() {

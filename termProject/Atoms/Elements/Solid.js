@@ -5,8 +5,8 @@ class Solid extends Element {
     super();
   }
 
-  step(grid, row, col, ROWS) {
-    grid[row][col] = this;
+  step() {
+    return;
   }
 }
 

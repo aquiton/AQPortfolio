@@ -40,7 +40,6 @@ class Gas extends Element {
 
   step(grid, row, col, ROWS) {
     //cell directly under
-    // let gravity = this.calculateGravity(grid, row, col);
     let gravity = 1;
     let targetCell;
     let bottomLeftCell;
@@ -89,9 +88,11 @@ class Gas extends Element {
       if (targetCell == 0) {
         grid[row][col] = 0;
         grid[row][col - gravity] = this;
-      } else if (targetCell instanceof Liquid) {
-        //swap cells
-
+      } else if (
+        targetCell instanceof Liquid ||
+        targetCell instanceof MoveAbleSolid
+      ) {
+        //swap cell
         grid[row][col] = targetCell;
         grid[row][col - gravity] = this;
       } else if (targetCell != 0) {

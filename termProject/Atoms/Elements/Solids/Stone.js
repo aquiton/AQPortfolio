@@ -1,4 +1,4 @@
-import Solid from "./Solid";
+import Solid from "../Solid";
 
 class Stone extends Solid {
   constructor() {
