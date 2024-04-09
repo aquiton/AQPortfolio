@@ -1,4 +1,4 @@
-import * as PIXI from "pixi.js";
+// import * as PIXI from "pixi.js";
 import Grid from "./Grid.js";
 import Sand from "./Elements/MovableSolids/Sand.js";
 import Water from "./Elements/Liquids/Water.js";
