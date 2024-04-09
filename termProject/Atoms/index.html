@@ -1,132 +1,83 @@
 <!doctype html>
-<html lang="en">
+<html>
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Atoms
-    </title>
+    <script src="https://pixijs.download/release/pixi.min.js"></script>
     <link rel="stylesheet" href="style.css">
   </head>
   <body>
-    <script type="module" src="/main.js">
-import * as PIXI from "pixi.js";
-import Grid from "./Grid.js";
-import Sand from "./Elements/MovableSolids/Sand.js";
-import Water from "./Elements/Liquids/Water.js";
-import Stone from "./Elements/Solids/Stone.js";
-import Air from "./Elements/Gas/Air.js";
-import Ember from "./Elements/MovableSolids/Embers.js";
+    <script type="module">
+      const app = new PIXI.Application();
 
-const app = new PIXI.Application();
-
-app
+      app
   .init({
     width: 500,
     height: 500,
     resizeTo: window,
-    backgroundColor: 0xffc0cb,
+    backgroundColor: 0xfff000,
   })
   .then(() => {
-    app.renderer.background.color = 0x23395d;
-    app.renderer.canvas.style.position = "absolute"; // removes scrolling
+    app.renderer.background.color = 0xfff000;
+    app.renderer.canvas.style.position = "absolute";
     document.body.appendChild(app.canvas);
-    let SPACER = 5; //pixel size set to 2
-    let COLS = Math.floor(app.renderer.height / SPACER); //minus gives space at end of screen
-    let ROWS = Math.floor(app.renderer.width / SPACER); //divided by spacer to convert it to grid base
 
-    // console.log(
-    //   "Acutal Height: " + app.renderer.height + " New Height: " + COLS
-    // );
-    // console.log("Actual Width: " + app.renderer.width + " New Width: " + ROWS);
+    // Start loading right away and create a promise
+    const texturePromise = PIXI.Assets.load(
+      "https://pixijs.com/assets/bunny.png"
+    );
 
-    //background
-    let bg = new PIXI.Sprite(PIXI.Texture.WHITE);
-    bg.width = app.screen.width;
-    bg.height = app.screen.height;
-    bg.tint = 0x000000;
-    bg.interactive = true;
+    // When the promise resolves, we have the texture!
+    texturePromise.then((resolvedTexture) => {
+      // create a new Sprite from the resolved loaded Texture
+      const bunny = PIXI.Sprite.from(resolvedTexture);
 
-    //setup grid
-    let grid = new Grid(ROWS, COLS, SPACER);
-    grid.setupGrid();
+      // center the sprite's anchor point
+      bunny.anchor.set(0.5);
 
-    //mouse input
-    let mouseDown = false;
-    bg.on("mousedown", function (e) {
-      mouseDown = !mouseDown;
-    });
+      // move the sprite to the center of the screen
+      bunny.x = app.screen.width / 2;
+      bunny.y = app.screen.height / 2;
 
-    bg.on("mouseup", function (e) {
-      mouseDown = !mouseDown;
-    });
+      app.stage.addChild(bunny);
 
-    window.addEventListener("keydown", keysDown);
+      window.addEventListener("keydown", keysDown);
+      window.addEventListener("keyup", () => {
+        keyDown = false;
+        keyCode = 0;
+      });
 
-    let keyCode = 87;
+      let keyCode = 0;
+      let keyDown = false;
 
-    function keysDown(e) {
-      keyCode = e.keyCode;
-      console.log(keyCode);
-    }
+      function keysDown(e) {
+        keyCode = e.keyCode;
+        keyDown = true;
+        console.log(e.keyCode);
+      }
 
-    bg.on("mousemove", function (e) {
-      let mouseX = Math.floor(e.global.x / SPACER);
-      let mouseY = Math.floor(e.global.y / SPACER);
-      //to check if mouse x (row) is less than col -1
-      let matrix = 5;
-      let extent = Math.floor(matrix / 2);
-      if (mouseDown) {
-        for (let i = -extent; i <= extent; i++) {
-          for (let j = -extent; j <= extent; j++) {
-            if (Math.random(1) < 0.75) {
-              let col = mouseY + i;
-              let row = mouseX + j;
-              //  let s = new Sand();
-              let element = new Water();
-              if (keyCode == 87) {
-                element = new Water();
-                grid.addPixel(row, col, element);
-              } else if (keyCode == 83) {
-                element = new Sand();
-                grid.addPixel(row, col, element);
-              } else if (keyCode == 68) {
-                element = new Stone();
-                grid.addPixel(row, col, element);
-              } else if (keyCode == 65) {
-                element = new Air();
-                grid.addPixel(row, col, element);
-              } else {
-                element = new Ember();
-                grid.addPixel(row, col, element);
-              }
-            }
+      app.ticker.add((time) => {
+        if (bunny.y < app.screen.height - 20) {
+          bunny.y += 5 * time.deltaTime;
+        }
+        if (keyDown) {
+          if (
+            (keyCode == 68 || keyCode == 39) &&
+            bunny.x < app.screen.width - 10
+          ) {
+            bunny.x += 5;
+          }
+          if ((keyCode == 65 || keyCode == 37) && bunny.x > 10) {
+            bunny.x -= 5;
           }
         }
-      }
+        if (bunny.y > app.screen.height - 20) {
+          console.log(true);
+          if (keyCode == 38) {
+            bunny.y -= 50;
+          }
+        }
+      });
     });
-
-    // Add it to the stage to render
-    const graphics = new PIXI.Graphics();
-
-    const gridTexture = app.renderer.generateTexture(graphics);
-
-    app.stage.addChild(bg);
-
-    app.stage.addChild(graphics);
-
-    app.ticker.add(animate);
-
-    function animate() {
-      graphics.clear();
-      grid.updateGrid(graphics);
-
-      //console.log("Water Count : " + grid.getElementCount(Water));
-      // console.log("Sand Count : " + grid.getElementCount(Sand));
-      //console.log("Air Count : " + grid.getElementCount(Air));
-    }
   });
-
-
 
 
     </script>
