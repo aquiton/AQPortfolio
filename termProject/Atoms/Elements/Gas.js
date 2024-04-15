@@ -46,11 +46,16 @@ class Gas extends Element {
     let leftSpread, rightSpread;
     let leftCell;
     let rightCell;
+    let neighborLeft = grid[row - 1][col];
+    let neighborRight;
+    let bottomCell = grid[row][col + 1];
+    let aboveCell = grid[row][col - 1];
 
     if (row < ROWS - 1 && col > 1) {
       bottomRightCell = grid[row + 1][col - 1];
       bottomLeftCell = grid[row - 1][col - 1];
       targetCell = grid[row][col - gravity];
+      neighborRight = grid[row + 1][col];
     }
 
     let righBound = ROWS - this.spread;
@@ -79,9 +84,16 @@ class Gas extends Element {
 
     //random direction
     let dir = 1;
+
     if (Math.random(1) < 0.5) {
       dir *= -1;
     }
+    if (Math.random(1) < 0.5) {
+      targetCell = 1;
+    }
+
+    let touchingCells = [aboveCell, bottomCell, neighborLeft, neighborRight];
+    this.actOnOther(touchingCells);
 
     if (this.has_been_updated == false) {
       if (targetCell == 0) {
@@ -98,7 +110,7 @@ class Gas extends Element {
         if (bottomLeftCell == 0 && dir < 0) {
           grid[row][col] = 0;
           grid[row - 1][col - 1] = this;
-        } else if (bottomRightCell == 0 && dir < 0) {
+        } else if (bottomRightCell == 0 && dir > 0) {
           grid[row][col] = 0;
           grid[row + 1][col - 1] = this;
         } else if (leftCell == 0 && dir < 0) {

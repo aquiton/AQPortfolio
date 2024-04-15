@@ -1,5 +1,5 @@
-import Element from "./Element";
-import Solid from "./Solid";
+import Element from "./Element.js";
+import Solid from "./Solid.js";
 
 class Liquid extends Element {
   constructor() {
@@ -7,6 +7,7 @@ class Liquid extends Element {
     this.velocity = 5;
     this.spread = 5;
     this.color = 0x2389da;
+    this.hasBeenUpdated = false;
   }
 
   calculateSpread(grid, row, col, dir) {
@@ -35,6 +36,10 @@ class Liquid extends Element {
     let bottomRightCell;
     let leftSpread, rightSpread;
     let leftCell, rightCell;
+    let neighborLeft = grid[row - 1][col];
+    let neighborRight;
+    let bottomCell = grid[row][col + 1];
+    let aboveCell = grid[row][col - 1];
 
     //random direction
     let dir = 1;
@@ -45,6 +50,7 @@ class Liquid extends Element {
     //checks
     if (row < ROWS - 1) {
       bottomRightCell = grid[row + 1][col + 1];
+      neighborRight = grid[row + 1][col];
     }
 
     let righBound = ROWS - this.spread;
@@ -70,25 +76,40 @@ class Liquid extends Element {
       rightCell = grid[row + rightSpread][col];
     }
 
-    if (targetCell == 0) {
-      grid[row][col] = 0;
-      grid[row][col + gravity] = this;
-    } else if (targetCell != 0) {
-      if (bottomLeftCell == 0 && dir < 0) {
+    let touchingCells = [aboveCell, bottomCell, neighborLeft, neighborRight];
+    this.actOnOther(touchingCells);
+    if (this.temperature < 0) {
+      this.temperature = 0;
+    } else {
+      this.temperature -= 1;
+    }
+
+    if (this.hasBeenUpdated == false) {
+      if (targetCell == 0) {
         grid[row][col] = 0;
-        grid[row - 1][col + 1] = this;
-      } else if (bottomRightCell == 0 && dir > 0) {
-        grid[row][col] = 0;
-        grid[row + 1][col + 1] = this;
-      } else if (leftCell == 0 && dir < 0) {
-        grid[row][col] = 0;
-        grid[row - leftSpread][col] = this;
-      } else if (rightCell == 0 && dir > 0) {
-        grid[row][col] = 0;
-        grid[row + rightSpread][col] = this;
+        grid[row][col + gravity] = this;
+      } else if (targetCell != 0) {
+        if (bottomLeftCell == 0 && dir < 0) {
+          grid[row][col] = 0;
+          grid[row - 1][col + 1] = this;
+        } else if (bottomRightCell == 0 && dir > 0) {
+          grid[row][col] = 0;
+          grid[row + 1][col + 1] = this;
+        } else if (leftCell == 0 && dir < 0) {
+          grid[row][col] = 0;
+          grid[row - leftSpread][col] = this;
+        } else if (rightCell == 0 && dir > 0) {
+          grid[row][col] = 0;
+          grid[row + rightSpread][col] = this;
+        } else {
+          grid[row][col] = this;
+        }
       } else {
         grid[row][col] = this;
       }
+      this.hasBeenUpdated = true;
+    } else {
+      this.hasBeenUpdated = false;
     }
   }
 }

@@ -48,6 +48,17 @@ class Grid {
         if (state != 0) {
           state.step(this.grid, i, j, this.gridRows);
           state.draw(Graphics, i, j, this.spacer);
+          if (state.hasEffect) {
+            state.drawEffect(
+              Graphics,
+              i,
+              j,
+              this.spacer,
+              this.grid,
+              this.gridRows,
+              this.gridCols
+            );
+          }
         }
       }
     }

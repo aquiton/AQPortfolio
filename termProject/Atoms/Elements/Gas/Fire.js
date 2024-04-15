@@ -1,13 +1,10 @@
-import MoveAbleSolid from "../MovableSolid";
+import Gas from "../Gas";
+import Smoke from "./Smoke";
 import Element from "../Element";
 
-import Smoke from "../Gas/Smoke";
-import { Graphics } from "pixi.js";
-
-class Ember extends MoveAbleSolid {
+class Fire extends Gas {
   constructor() {
     super();
-    this.life_time = Math.floor(Math.random() * (300 - 100) + 100);
     let randomNumber = Math.random();
     if (randomNumber < 0.25) {
       this.color = "rgb(255, 90, 0)";
@@ -19,12 +16,13 @@ class Ember extends MoveAbleSolid {
       this.color = "rgb(235, 70, 0)";
     }
     this.hasEffect = true;
-    this.temperature = 600;
+    this.temperature = 1000;
+    this.life_time = Math.floor(Math.random() * (25 - 5) + 5);
   }
 
   actOnOther(touchingCells) {
     touchingCells.forEach((cell) => {
-      if (cell instanceof Element && !(cell instanceof Ember)) {
+      if (cell instanceof Element && !(cell instanceof Fire)) {
         this.applyHeat(cell);
       }
     });
@@ -37,6 +35,7 @@ class Ember extends MoveAbleSolid {
     } else {
       super.step(grid, row, col, ROWS);
     }
+    this.temperature += 2;
 
     if (grid[row][col - 1] == 0) {
       if (Math.random(1) < 0.005) {
@@ -46,4 +45,4 @@ class Ember extends MoveAbleSolid {
   }
 }
 
-export default Ember;
+export default Fire;

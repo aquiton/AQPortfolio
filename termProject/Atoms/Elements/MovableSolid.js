@@ -5,7 +5,7 @@ class MoveAbleSolid extends Solid {
   constructor() {
     super();
     this.velocity = 5;
-    this.has_been_updated = false;
+    this.hasBeenUpdated = false;
   }
 
   step(grid, row, col, ROWS) {
@@ -14,9 +14,13 @@ class MoveAbleSolid extends Solid {
     let targetCell = grid[row][col + gravity];
     let bottomLeftCell = grid[row - 1][col + 1];
     let bottomRightCell;
+    let leftCell = grid[row - 1][col];
+    let rightCell;
+    let aboveCell = grid[row][col - 1];
 
     if (row < ROWS - 1) {
       bottomRightCell = grid[row + 1][col + 1];
+      rightCell = grid[row + 1][col];
     }
 
     //random direction
@@ -25,14 +29,23 @@ class MoveAbleSolid extends Solid {
       dir *= -1;
     }
 
-    //console.log(this.actOnOther());
+    let touchingCells = [aboveCell, targetCell, leftCell, rightCell];
+    this.actOnOther(touchingCells);
 
+    if (this.temperature < 0) {
+      this.temperature = 0;
+    } else {
+      this.temperature -= 1;
+    }
+
+    // if (this.life_time == 0) {
+    //   grid[row][col] = 0;
+    // } else {
     if (targetCell == 0) {
       grid[row][col] = 0;
       grid[row][col + gravity] = this;
     } else if (targetCell instanceof Liquid) {
       //swap cells
-
       grid[row][col] = targetCell;
       grid[row][col + gravity] = this;
     } else if (targetCell instanceof Solid) {
@@ -44,6 +57,7 @@ class MoveAbleSolid extends Solid {
         grid[row + 1][col + 1] = this;
       }
     }
+    // }
   }
 }
 

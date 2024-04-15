@@ -3,7 +3,12 @@ import Gas from "../Gas";
 class Air extends Gas {
   constructor() {
     super();
-    this.color = 0xa19fa0;
+    this.color = "rgb(161, 159, 160)";
+  }
+
+  step(grid, row, col, ROWS) {
+    super.step(grid, row, col, ROWS);
+    this.temperature -= 5;
   }
 }
 

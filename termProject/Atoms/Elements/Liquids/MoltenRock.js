@@ -1,22 +1,21 @@
-import Solid from "../Solid";
+import Liquid from "../Liquid";
 import Element from "../Element";
-import MoltenRock from "../Liquids/MoltenRock";
-
-class Stone extends Solid {
+import Stone from "../Solids/Stone";
+class MoltenRock extends Liquid {
   constructor() {
     super();
     let randomNumber = Math.random();
     if (randomNumber < 0.25) {
-      this.color = "rgb(144, 152, 163)";
+      this.color = "rgb(255, 90, 0)";
     } else if (randomNumber < 0.5) {
-      this.color = "rgb(135, 140, 150)";
+      this.color = "rgb(245, 80, 0)";
     } else if (randomNumber < 0.75) {
-      this.color = "rgb(157, 162, 173)";
+      this.color = "rgb(255, 100, 10)";
     } else {
-      this.color = "rgb(110, 120, 130)";
+      this.color = "rgb(235, 70, 0)";
     }
     this.reactPoint = 500;
-    this.temperature = 0;
+    this.temperature = 800;
   }
 
   actOnOther(touchingCells) {
@@ -29,10 +28,10 @@ class Stone extends Solid {
 
   step(grid, row, col, ROWS) {
     super.step(grid, row, col, ROWS);
-    if (this.temperature >= this.reactPoint) {
-      grid[row][col] = new MoltenRock();
+    if (this.temperature <= this.reactPoint) {
+      grid[row][col] = new Stone();
     }
   }
 }
 
-export default Stone;
+export default MoltenRock;

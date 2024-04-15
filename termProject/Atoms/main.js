@@ -5,6 +5,9 @@ import Water from "./Elements/Liquids/Water.js";
 import Stone from "./Elements/Solids/Stone.js";
 import Air from "./Elements/Gas/Air.js";
 import Ember from "./Elements/MovableSolids/Embers.js";
+import Dust from "./Elements/MovableSolids/Dust.js";
+import Gravel from "./Elements/MovableSolids/Gravel.js";
+import Fire from "./Elements/Gas/Fire.js";
 
 const app = new PIXI.Application();
 
@@ -62,32 +65,40 @@ app
       let mouseX = Math.floor(e.global.x / SPACER);
       let mouseY = Math.floor(e.global.y / SPACER);
       //to check if mouse x (row) is less than col -1
-      let matrix = 5;
+      let matrix = 2;
       let extent = Math.floor(matrix / 2);
       if (mouseDown) {
         for (let i = -extent; i <= extent; i++) {
           for (let j = -extent; j <= extent; j++) {
+            let col = mouseY + i;
+            let row = mouseX + j;
+            let element = new Water();
             if (Math.random(1) < 0.75) {
-              let col = mouseY + i;
-              let row = mouseX + j;
               //  let s = new Sand();
-              let element = new Water();
               if (keyCode == 87) {
                 element = new Water();
                 grid.addPixel(row, col, element);
               } else if (keyCode == 83) {
                 element = new Sand();
                 grid.addPixel(row, col, element);
-              } else if (keyCode == 68) {
-                element = new Stone();
+              } else if (keyCode == 70) {
+                element = new Dust();
                 grid.addPixel(row, col, element);
               } else if (keyCode == 65) {
                 element = new Air();
                 grid.addPixel(row, col, element);
-              } else {
+              } else if (keyCode == 69) {
                 element = new Ember();
                 grid.addPixel(row, col, element);
+              } else {
+                element = new Fire();
+                grid.addPixel(row, col, element);
               }
+            }
+            //for solids no randomness
+            if (keyCode == 68) {
+              element = new Stone();
+              grid.addPixel(row, col, element);
             }
           }
         }
@@ -96,8 +107,6 @@ app
 
     // Add it to the stage to render
     const graphics = new PIXI.Graphics();
-
-    const gridTexture = app.renderer.generateTexture(graphics);
 
     app.stage.addChild(bg);
 
@@ -112,5 +121,6 @@ app
       //console.log("Water Count : " + grid.getElementCount(Water));
       // console.log("Sand Count : " + grid.getElementCount(Sand));
       //console.log("Air Count : " + grid.getElementCount(Air));
+      console.log("Stone Count : " + grid.getElementCount(Stone));
     }
   });
