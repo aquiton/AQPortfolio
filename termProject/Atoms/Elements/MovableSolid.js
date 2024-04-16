@@ -41,22 +41,22 @@ class MoveAbleSolid extends Solid {
     // if (this.life_time == 0) {
     //   grid[row][col] = 0;
     // } else {
-      if (targetCell == 0) {
+    if (targetCell == 0) {
+      grid[row][col] = 0;
+      grid[row][col + gravity] = this;
+    } else if (targetCell instanceof Liquid) {
+      //swap cells
+      grid[row][col] = targetCell;
+      grid[row][col + gravity] = this;
+    } else if (targetCell instanceof Solid) {
+      if (bottomLeftCell == 0 && dir < 0) {
         grid[row][col] = 0;
-        grid[row][col + gravity] = this;
-      } else if (targetCell instanceof Liquid) {
-        //swap cells
-        grid[row][col] = targetCell;
-        grid[row][col + gravity] = this;
-      } else if (targetCell instanceof Solid) {
-        if (bottomLeftCell == 0 && dir < 0) {
-          grid[row][col] = 0;
-          grid[row - 1][col + 1] = this;
-        } else if (bottomRightCell == 0 && dir < 0) {
-          grid[row][col] = 0;
-          grid[row + 1][col + 1] = this;
-        }
+        grid[row - 1][col + 1] = this;
+      } else if (bottomRightCell == 0 && dir < 0) {
+        grid[row][col] = 0;
+        grid[row + 1][col + 1] = this;
       }
+    }
     // }
   }
 }
