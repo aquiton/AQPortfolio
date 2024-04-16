@@ -1,6 +1,6 @@
-import MoveAbleSolid from "../MovableSolid";
-import Element from "../Element";
-import Fire from "../Gas/Fire";
+import MoveAbleSolid from "../MovableSolid.js";
+import Element from "../Element.js";
+import Fire from "../Gas/Fire.js";
 
 class Dust extends MoveAbleSolid {
   constructor() {

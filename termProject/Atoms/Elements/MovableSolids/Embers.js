@@ -1,8 +1,6 @@
-import MoveAbleSolid from "../MovableSolid";
-import Element from "../Element";
-
-import Smoke from "../Gas/Smoke";
-import { Graphics } from "pixi.js";
+import MoveAbleSolid from "../MovableSolid.js";
+import Element from "../Element.js";
+import Smoke from "../Gas/Smoke.js";
 
 class Ember extends MoveAbleSolid {
   constructor() {

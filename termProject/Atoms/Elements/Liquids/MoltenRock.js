@@ -1,6 +1,6 @@
-import Liquid from "../Liquid";
-import Element from "../Element";
-import Stone from "../Solids/Stone";
+import Liquid from "../Liquid.js";
+import Element from "../Element.js";
+import Stone from "../Solids/Stone.js";
 class MoltenRock extends Liquid {
   constructor() {
     super();

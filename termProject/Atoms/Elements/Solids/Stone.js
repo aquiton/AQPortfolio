@@ -1,6 +1,6 @@
-import Solid from "../Solid";
-import Element from "../Element";
-import MoltenRock from "../Liquids/MoltenRock";
+import Solid from "../Solid.js";
+import Element from "../Element.js";
+import MoltenRock from "../Liquids/MoltenRock.js";
 
 class Stone extends Solid {
   constructor() {

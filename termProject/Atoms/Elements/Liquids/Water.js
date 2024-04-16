@@ -1,5 +1,5 @@
-import Liquid from "../Liquid";
-import Steam from "../Gas/Steam";
+import Liquid from "../Liquid.js";
+import Steam from "../Gas/Steam.js";
 class Water extends Liquid {
   constructor() {
     super();

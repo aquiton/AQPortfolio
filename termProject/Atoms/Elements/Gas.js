@@ -1,7 +1,7 @@
-import Element from "./Element";
-import Liquid from "./Liquid";
-import MoveAbleSolid from "./MovableSolid";
-import Solid from "./Solid";
+import Element from "./Element.js";
+import Liquid from "./Liquid.js";
+import MoveAbleSolid from "./MovableSolid.js";
+import Solid from "./Solid.js";
 
 class Gas extends Element {
   constructor() {

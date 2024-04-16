@@ -1,7 +1,3 @@
-//import * as PIXI from "pixi.js";
-import MovableSolid from "./Elements/MovableSolid";
-import Sand from "./Elements/MovableSolids/Sand";
-import Water from "./Elements/Liquids/Water";
 class Grid {
   constructor(rows, cols, spacer) {
     this.gridRows = rows;

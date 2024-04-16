@@ -1,5 +1,5 @@
-import Gas from "../Gas";
-import Water from "../Liquids/Water";
+import Gas from "../Gas.js";
+import Water from "../Liquids/Water.js";
 
 class Steam extends Gas {
   constructor() {

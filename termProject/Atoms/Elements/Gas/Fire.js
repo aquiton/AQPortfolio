@@ -1,6 +1,6 @@
-import Gas from "../Gas";
-import Smoke from "./Smoke";
-import Element from "../Element";
+import Gas from "../Gas.js";
+import Smoke from "./Smoke.js";
+import Element from "../Element.js";
 
 class Fire extends Gas {
   constructor() {

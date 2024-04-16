@@ -1,7 +1,7 @@
-import Solid from "../Solid";
-import Element from "../Element";
-import Embers from "../MovableSolids/Embers";
-import Fire from "../Gas/Fire";
+import Solid from "../Solid.js";
+import Element from "../Element.js";
+import Embers from "../MovableSolids/Embers.js";
+import Fire from "../Gas/Fire.js";
 
 class Wood extends Solid {
   constructor() {

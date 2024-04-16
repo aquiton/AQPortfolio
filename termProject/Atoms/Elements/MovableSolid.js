@@ -1,5 +1,5 @@
-import Liquid from "./Liquid";
-import Solid from "./Solid";
+import Liquid from "./Liquid.js";
+import Solid from "./Solid.js";
 
 class MoveAbleSolid extends Solid {
   constructor() {

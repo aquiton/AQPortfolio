@@ -1,5 +1,5 @@
-import MoveAbleSolid from "../MovableSolid";
-import Element from "../Element";
+import MoveAbleSolid from "../MovableSolid.js";
+import Element from "../Element.js";
 
 class Soil extends MoveAbleSolid {
   constructor() {

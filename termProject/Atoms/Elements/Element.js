@@ -1,5 +1,3 @@
-import * as PIXI from "pixi.js";
-
 class Element {
   constructor() {
     if (this.constructor == Element) {
