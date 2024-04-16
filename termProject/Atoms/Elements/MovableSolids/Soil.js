@@ -1,5 +1,6 @@
 import MoveAbleSolid from "../MovableSolid.js";
 import Element from "../Element.js";
+import Wood from "../Solids/Wood.js";
 
 class Soil extends MoveAbleSolid {
   constructor() {
@@ -16,6 +17,7 @@ class Soil extends MoveAbleSolid {
     } else {
       this.color = "rgb(94,61,38)";
     }
+    this.canGrowTree = true;
   }
   actOnOther(touchingCells) {
     touchingCells.forEach((cell) => {
@@ -23,6 +25,21 @@ class Soil extends MoveAbleSolid {
         this.applyHeat(cell);
       }
     });
+  }
+
+  step(grid, row, col, ROWS) {
+    // if (
+    //   grid[row][col - 1] == 0 &&
+    //   grid[row][col + 1] != 0 &&
+    //   this.canGrowTree
+    // ) {
+    //   if (Math.random(1) < 0.00005) {
+    //     grid[row][col - 1] = new Wood();
+    //     //check other soils around and make sure they can't grow tree
+    //   }
+    // }
+
+    super.step(grid, row, col, ROWS);
   }
 }
 

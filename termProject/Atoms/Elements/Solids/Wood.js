@@ -2,6 +2,7 @@ import Solid from "../Solid.js";
 import Element from "../Element.js";
 import Embers from "../MovableSolids/Embers.js";
 import Fire from "../Gas/Fire.js";
+import Soil from "../MovableSolids/Soil.js";
 
 class Wood extends Solid {
   constructor() {
@@ -18,6 +19,8 @@ class Wood extends Solid {
     }
     this.reactPoint = 300;
     this.temperature = 0;
+    this.isRooted = false;
+    this.canGrow = true;
   }
 
   actOnOther(touchingCells) {
@@ -43,6 +46,7 @@ class Wood extends Solid {
     } else {
       this.hasEffect = false;
     }
+
     super.step(grid, row, col, ROWS);
   }
 }
