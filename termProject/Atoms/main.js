@@ -1,15 +1,15 @@
 // import * as PIXI from "pixi.js";
-// import Grid from "./Grid.js";
-// import Sand from "./Elements/MovableSolids/Sand.js";
-// import Water from "./Elements/Liquids/Water.js";
-// import Stone from "./Elements/Solids/Stone.js";
-// import Air from "./Elements/Gas/Air.js";
-// import Ember from "./Elements/MovableSolids/Embers.js";
-// import Dust from "./Elements/MovableSolids/Dust.js";
-// import Gravel from "./Elements/MovableSolids/Gravel.js";
-// import Fire from "./Elements/Gas/Fire.js";
-// import Wood from "./Elements/Solids/Wood.js";
-// import Soil from "./Elements/MovableSolids/Soil.js";
+import Grid from "./Grid.js";
+import Sand from "./Elements/MovableSolids/Sand.js";
+import Water from "./Elements/Liquids/Water.js";
+import Stone from "./Elements/Solids/Stone.js";
+import Air from "./Elements/Gas/Air.js";
+import Ember from "./Elements/MovableSolids/Embers.js";
+import Dust from "./Elements/MovableSolids/Dust.js";
+import Gravel from "./Elements/MovableSolids/Gravel.js";
+import Fire from "./Elements/Gas/Fire.js";
+import Wood from "./Elements/Solids/Wood.js";
+import Soil from "./Elements/MovableSolids/Soil.js";
 
 const app = new PIXI.Application();
 
