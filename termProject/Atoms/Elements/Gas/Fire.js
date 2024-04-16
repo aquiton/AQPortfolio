@@ -35,6 +35,7 @@ class Fire extends Gas {
     } else {
       super.step(grid, row, col, ROWS);
     }
+
     this.temperature += 2;
 
     if (grid[row][col - 1] == 0) {

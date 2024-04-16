@@ -28,10 +28,10 @@ class Stone extends Solid {
   }
 
   step(grid, row, col, ROWS) {
-    super.step(grid, row, col, ROWS);
     if (this.temperature >= this.reactPoint) {
       grid[row][col] = new MoltenRock();
     }
+    super.step(grid, row, col, ROWS);
   }
 }
 

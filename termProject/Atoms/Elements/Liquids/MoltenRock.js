@@ -14,7 +14,7 @@ class MoltenRock extends Liquid {
     } else {
       this.color = "rgb(235, 70, 0)";
     }
-    this.reactPoint = 500;
+    this.reactPoint = 300;
     this.temperature = 800;
   }
 
@@ -27,10 +27,10 @@ class MoltenRock extends Liquid {
   }
 
   step(grid, row, col, ROWS) {
-    super.step(grid, row, col, ROWS);
     if (this.temperature <= this.reactPoint) {
       grid[row][col] = new Stone();
     }
+    super.step(grid, row, col, ROWS);
   }
 }
 

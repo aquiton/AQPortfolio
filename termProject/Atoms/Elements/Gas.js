@@ -95,6 +95,12 @@ class Gas extends Element {
     let touchingCells = [aboveCell, bottomCell, neighborLeft, neighborRight];
     this.actOnOther(touchingCells);
 
+    if (this.temperature < 0) {
+      this.temperature = 0;
+    } else {
+      this.temperature -= 1;
+    }
+
     if (this.has_been_updated == false) {
       if (targetCell == 0) {
         grid[row][col] = 0;

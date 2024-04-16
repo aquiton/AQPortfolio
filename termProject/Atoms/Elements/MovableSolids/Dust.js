@@ -16,7 +16,8 @@ class Dust extends MoveAbleSolid {
       this.color = "rgb(174, 158, 108)";
     }
     this.temperature = 0;
-    this.reactPoint = 150;
+
+    this.reactPoint = 250;
   }
 
   actOnOther(touchingCells) {

@@ -84,6 +84,8 @@ class Liquid extends Element {
       this.temperature -= 1;
     }
 
+    //add new die and replace method
+
     if (this.hasBeenUpdated == false) {
       if (targetCell == 0) {
         grid[row][col] = 0;

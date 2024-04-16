@@ -1,5 +1,5 @@
 import Liquid from "../Liquid";
-import Air from "../Gas/Air";
+import Steam from "../Gas/Steam";
 class Water extends Liquid {
   constructor() {
     super();
@@ -13,15 +13,15 @@ class Water extends Liquid {
     } else {
       this.color = "rgb(15, 117, 198)";
     }
-    this.reactPoint = 25;
+    this.reactPoint = 100;
     this.temperature = -10;
   }
 
   step(grid, row, col, ROWS) {
-    super.step(grid, row, col, ROWS);
     if (this.temperature >= this.reactPoint) {
-      grid[row][col] = new Air();
+      grid[row][col] = new Steam();
     }
+    super.step(grid, row, col, ROWS);
   }
 }
 

@@ -12,6 +12,7 @@ class Element {
     this.hasBeenUpdated;
     this.reactPoint;
     this.hasEffect = false;
+    this.allowColorChange = true;
   }
 
   draw(Graphics, row, col, spacer) {
@@ -29,7 +30,7 @@ class Element {
     let adjustedGreen = green;
     let adjustedBlue = blue;
 
-    if (this.temperature > 0) {
+    if (this.temperature > 0 && this.allowColorChange) {
       adjustedRed =
         temperature > 0
           ? Math.min(255, Math.max(50, Math.round(red + temperature * 2.55)))

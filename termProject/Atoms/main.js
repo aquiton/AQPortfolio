@@ -8,19 +8,21 @@ import Ember from "./Elements/MovableSolids/Embers.js";
 import Dust from "./Elements/MovableSolids/Dust.js";
 import Gravel from "./Elements/MovableSolids/Gravel.js";
 import Fire from "./Elements/Gas/Fire.js";
+import Wood from "./Elements/Solids/Wood.js";
+import Soil from "./Elements/MovableSolids/Soil.js";
 
 const app = new PIXI.Application();
 
 app
   .init({
-    width: 500,
+    width: 800,
     height: 500,
-    resizeTo: window,
+
     backgroundColor: 0xffc0cb,
   })
   .then(() => {
     app.renderer.background.color = 0x23395d;
-    app.renderer.canvas.style.position = "absolute"; // removes scrolling
+    //  app.renderer.canvas.style.position = "absolute"; // removes scrolling
     document.body.appendChild(app.canvas);
     let SPACER = 5; //pixel size set to 2
     let COLS = Math.floor(app.renderer.height / SPACER); //minus gives space at end of screen
@@ -90,8 +92,14 @@ app
               } else if (keyCode == 69) {
                 element = new Ember();
                 grid.addPixel(row, col, element);
-              } else {
+              } else if (keyCode == 82) {
                 element = new Fire();
+                grid.addPixel(row, col, element);
+              } else if (keyCode == 81) {
+                element = new Wood();
+                grid.addPixel(row, col, element);
+              } else {
+                element = new Soil();
                 grid.addPixel(row, col, element);
               }
             }
@@ -121,6 +129,6 @@ app
       //console.log("Water Count : " + grid.getElementCount(Water));
       // console.log("Sand Count : " + grid.getElementCount(Sand));
       //console.log("Air Count : " + grid.getElementCount(Air));
-      console.log("Stone Count : " + grid.getElementCount(Stone));
+      //console.log("Stone Count : " + grid.getElementCount(Stone));
     }
   });

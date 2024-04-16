@@ -1,4 +1,16 @@
 * {
-  padding: 100;
+  padding: 0;
   margin: 0;
+  max-width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 30px;
+  background-color: #D2B48C;
 }
+
+canvas {
+  padding: 0;
+  margin: 0;
+  border:1px solid black;
+}
+

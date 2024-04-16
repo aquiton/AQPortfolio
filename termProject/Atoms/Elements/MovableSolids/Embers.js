@@ -37,6 +37,7 @@ class Ember extends MoveAbleSolid {
     } else {
       super.step(grid, row, col, ROWS);
     }
+    this.temperature += 2;
 
     if (grid[row][col - 1] == 0) {
       if (Math.random(1) < 0.005) {
