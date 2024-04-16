@@ -122,8 +122,6 @@ app
     app.stage.addChild(spr);
     app.stage.addChild(graphics);
 
-    app.ticker.add(animate);
-
     function animate() {
       graphics.clear();
       grid.updateGrid(graphics);
@@ -133,4 +131,6 @@ app
       //console.log("Air Count : " + grid.getElementCount(Air));
       //console.log("Stone Count : " + grid.getElementCount(Stone));
     }
+
+    app.ticker.add(animate);
   });
