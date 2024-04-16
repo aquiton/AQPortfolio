@@ -38,11 +38,13 @@ class Grid {
   }
 
   updateGrid(Graphics) {
-    for (let i = this.gridRows - 1; i > 0; i--) {
-      for (let j = this.gridCols - 1; j > 0; j--) {
-        let state = this.grid[i][j];
-        if (state != 0) {
-          state.step(this.grid, i, j, this.gridRows);
+    const numRows = this.gridRows;
+    const numCols = this.gridCols;
+    for (let i = numRows - 1; i > 0; i--) {
+      for (let j = numCols - 1; j > 0; j--) {
+        const state = this.grid[i][j];
+        if (state !== 0) {
+          state.step(this.grid, i, j, numRows);
           state.draw(Graphics, i, j, this.spacer);
           if (state.hasEffect) {
             state.drawEffect(
@@ -51,8 +53,8 @@ class Grid {
               j,
               this.spacer,
               this.grid,
-              this.gridRows,
-              this.gridCols
+              numRows,
+              numCols
             );
           }
         }

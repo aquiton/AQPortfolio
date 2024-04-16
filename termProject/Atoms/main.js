@@ -22,6 +22,7 @@ app
   })
   .then(() => {
     app.renderer.background.color = 0x23395d;
+
     //  app.renderer.canvas.style.position = "absolute"; // removes scrolling
     document.body.appendChild(app.canvas);
     let SPACER = 5; //pixel size set to 2
@@ -95,10 +96,7 @@ app
               } else if (keyCode == 82) {
                 element = new Fire();
                 grid.addPixel(row, col, element);
-              } else if (keyCode == 81) {
-                element = new Wood();
-                grid.addPixel(row, col, element);
-              } else {
+              } else if (keyCode == 86) {
                 element = new Soil();
                 grid.addPixel(row, col, element);
               }
@@ -106,6 +104,9 @@ app
             //for solids no randomness
             if (keyCode == 68) {
               element = new Stone();
+              grid.addPixel(row, col, element);
+            } else if (keyCode == 81) {
+              element = new Wood();
               grid.addPixel(row, col, element);
             }
           }
@@ -116,10 +117,8 @@ app
     // Add it to the stage to render
     const graphics = new PIXI.Graphics();
 
-    var texture = app.renderer.generateTexture(graphics);
-    var spr = new PIXI.Sprite(texture);
     app.stage.addChild(bg);
-    app.stage.addChild(spr);
+
     app.stage.addChild(graphics);
 
     function animate() {
