@@ -116,11 +116,11 @@ app
     // Add it to the stage to render
     const graphics = new PIXI.Graphics();
 
+    var texture = app.renderer.generateTexture(graphics);
+    var spr = new PIXI.Sprite(texture);
     app.stage.addChild(bg);
-
+    app.stage.addChild(spr);
     app.stage.addChild(graphics);
-
-    app.ticker.add(animate);
 
     function animate() {
       graphics.clear();
@@ -132,3 +132,4 @@ app
       //console.log("Stone Count : " + grid.getElementCount(Stone));
     }
   });
+app.ticker.add(animate);
