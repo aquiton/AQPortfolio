@@ -1,3 +1,6 @@
+import Soil from "./Elements/MovableSolids/Soil.js";
+import Water from "./Elements/Liquids/Water.js";
+
 class Grid {
   constructor(rows, cols, spacer) {
     this.gridRows = rows;
@@ -6,9 +9,9 @@ class Grid {
     this.spacer = spacer;
   }
 
+  //set the 2d grid values to 0
   setupGrid() {
     let grid = [];
-
     for (let i = 0; i < this.gridRows; i++) {
       grid[i] = [];
       for (let j = 0; j < this.gridCols; j++) {
@@ -16,12 +19,15 @@ class Grid {
       }
     }
     this.grid = grid;
+  
   }
 
+  //set row and col to element called from main
   addPixel(row, col, value) {
     this.grid[row][col] = value;
   }
 
+  //debug to see for duplications or deletions
   getElementCount(Element) {
     let elementCounter = 0;
     for (let i = this.gridRows - 1; i > 0; i--) {
@@ -37,6 +43,9 @@ class Grid {
     return elementCounter;
   }
 
+  //main functionality of game 
+  //iterates through each position in the 2d grid
+  //checks if it is empty and if not then calls the step, draw, and effects methods
   updateGrid(Graphics) {
     const numRows = this.gridRows;
     const numCols = this.gridCols;

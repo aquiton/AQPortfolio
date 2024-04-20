@@ -5,6 +5,8 @@ import Fire from "../Gas/Fire.js";
 class Dust extends MoveAbleSolid {
   constructor() {
     super();
+
+    //random color generator
     let randomNumber = Math.random();
     if (randomNumber < 0.25) {
       this.color = "rgb(194, 178, 128)";
@@ -15,11 +17,12 @@ class Dust extends MoveAbleSolid {
     } else {
       this.color = "rgb(174, 158, 108)";
     }
-    this.temperature = 0;
+    this.temperature = 0; //base temp
 
     this.reactPoint = 250;
   }
 
+  //spread temperature
   actOnOther(touchingCells) {
     touchingCells.forEach((cell) => {
       if (cell instanceof Element) {
@@ -28,6 +31,7 @@ class Dust extends MoveAbleSolid {
     });
   }
 
+  //if temperature is greater than react point die and be replaced by fire
   step(grid, row, col, ROWS) {
     super.step(grid, row, col, ROWS);
     if (this.temperature >= this.reactPoint) {

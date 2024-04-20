@@ -9,27 +9,37 @@ class Liquid extends Element {
     this.color = 0x2389da;
     this.hasBeenUpdated = false;
   }
-
+  //just like gravity finds the next avaliable spot looking in the horizontal directions
   calculateSpread(grid, row, col, dir) {
-    const maxSpread = this.spread;
-    let step = 1;
-    while (step < maxSpread) {
-      const nextRow = row + step * dir;
-      if (
-        nextRow < 0 ||
-        nextRow >= grid.length ||
-        grid[nextRow][col] instanceof Solid
-      ) {
-        break; // Stop spreading if element object encountered or out of bounds
+    let i;
+    if (dir > 0) {
+      for (i = 1; i < this.spread; i++) {
+        if (grid[row + i][col] instanceof Solid) {
+          if (i == 1) {
+            return 1;
+          } else {
+            return i - 1;
+          }
+        }
       }
-      step++;
+    } else {
+      for (i = 1; i < this.spread; i++) {
+        if (grid[row - i][col] instanceof Solid) {
+          if (i == 1) {
+            return 1;
+          } else {
+            return i - 1;
+          }
+        }
+      }
     }
-    return Math.max(1, step - 1); // Ensure at least one step, and subtract 1 as the index is zero-based
+
+    return i;
   }
 
+  //main movement of liquid elements
+  //just like movable solids but checks left and right as well
   step(grid, row, col, ROWS) {
-    //cell directly under
-
     let gravity = this.calculateGravity(grid, row, col);
     let targetCell = grid[row][col + gravity];
     let bottomLeftCell = grid[row - 1][col + 1];
@@ -47,7 +57,7 @@ class Liquid extends Element {
       dir *= -1;
     }
 
-    //checks
+    //in bounds of screen check
     if (row < ROWS - 1) {
       bottomRightCell = grid[row + 1][col + 1];
       neighborRight = grid[row + 1][col];
@@ -57,7 +67,6 @@ class Liquid extends Element {
 
     if (row < ROWS - this.spread && row > this.spread) {
       //  rightSpread
-
       rightSpread = this.calculateSpread(grid, row, col, 1);
       rightCell = grid[row + rightSpread][col];
 
@@ -76,16 +85,18 @@ class Liquid extends Element {
       rightCell = grid[row + rightSpread][col];
     }
 
+    //neighborCells needed for actOnother (ex. temperature distribution)
     let touchingCells = [aboveCell, bottomCell, neighborLeft, neighborRight];
     this.actOnOther(touchingCells);
+
+    //cools element down to base temperature
     if (this.temperature < 0) {
       this.temperature = 0;
     } else {
       this.temperature -= 1;
     }
 
-    //add new die and replace method
-
+    //checks to see if this element has been updated for no teleportations and elements being updated multiple times in one tick
     if (this.hasBeenUpdated == false) {
       if (targetCell == 0) {
         grid[row][col] = 0;

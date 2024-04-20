@@ -7,6 +7,8 @@ import Soil from "../MovableSolids/Soil.js";
 class Wood extends Solid {
   constructor() {
     super();
+
+    //random color generator
     let randomNumber = Math.random();
     if (randomNumber < 0.25) {
       this.color = "rgb(161, 102, 47)";
@@ -19,10 +21,11 @@ class Wood extends Solid {
     }
     this.reactPoint = 300;
     this.temperature = 0;
-    this.isRooted = false;
-    this.canGrow = true;
+    this.isRooted = false; //going to be used for tree growth
+    this.canGrow = true; ////going to be used for tree growth
   }
 
+  //pass temperature to neighbor cells
   actOnOther(touchingCells) {
     touchingCells.forEach((cell) => {
       if (cell instanceof Element) {
@@ -31,12 +34,14 @@ class Wood extends Solid {
     });
   }
 
+  //if the temperature is greater than the react point then decrease life time and increase temperature and have fire effect
   step(grid, row, col, ROWS) {
     if (this.temperature >= this.reactPoint) {
       this.hasEffect = true;
       this.temperature += 10;
       this.life_time -= 1;
       if (this.life_time <= 0) {
+        //upon death either spawn Embers or Fire
         if (Math.random(1) < 0.25) {
           grid[row][col] = new Embers();
         } else {
@@ -47,6 +52,7 @@ class Wood extends Solid {
       this.hasEffect = false;
     }
 
+    //inherit solid step
     super.step(grid, row, col, ROWS);
   }
 }

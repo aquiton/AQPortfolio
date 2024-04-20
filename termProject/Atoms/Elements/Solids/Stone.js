@@ -5,6 +5,8 @@ import MoltenRock from "../Liquids/MoltenRock.js";
 class Stone extends Solid {
   constructor() {
     super();
+
+    //random color generator
     let randomNumber = Math.random();
     if (randomNumber < 0.25) {
       this.color = "rgb(144, 152, 163)";
@@ -15,10 +17,11 @@ class Stone extends Solid {
     } else {
       this.color = "rgb(110, 120, 130)";
     }
-    this.reactPoint = 500;
-    this.temperature = 0;
+    this.reactPoint = 500; //react temp
+    this.temperature = 0; //bsae temp
   }
 
+  //pass temperature to neighbor cells
   actOnOther(touchingCells) {
     touchingCells.forEach((cell) => {
       if (cell instanceof Element) {
@@ -27,10 +30,13 @@ class Stone extends Solid {
     });
   }
 
+  //if temperature is greater than react point then die and be replaced by moltenrock
   step(grid, row, col, ROWS) {
     if (this.temperature >= this.reactPoint) {
       grid[row][col] = new MoltenRock();
     }
+
+    //inherit solid step
     super.step(grid, row, col, ROWS);
   }
 }

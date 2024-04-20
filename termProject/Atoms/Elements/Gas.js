@@ -6,10 +6,11 @@ import Solid from "./Solid.js";
 class Gas extends Element {
   constructor() {
     super();
-    this.spread = 2;
+    this.spread = 3;
     this.has_been_updated = false;
   }
 
+  //just like gravity finds the next avaliable spot looking in the horizontal directions
   calculateSpread(grid, row, col, dir) {
     let i;
     if (dir > 0) {
@@ -37,9 +38,10 @@ class Gas extends Element {
     return i;
   }
 
+  //main movement of gas elements
+  //just like liquid but checks up instead of down
   step(grid, row, col, ROWS) {
-    //cell directly under
-    let gravity = 1;
+    let gravity = 1; //since gravity doesn't affect gasses as much it has a constant movement
     let targetCell;
     let bottomLeftCell;
     let bottomRightCell;
@@ -51,6 +53,7 @@ class Gas extends Element {
     let bottomCell = grid[row][col + 1];
     let aboveCell = grid[row][col - 1];
 
+    //in bounds of screen check
     if (row < ROWS - 1 && col > 1) {
       bottomRightCell = grid[row + 1][col - 1];
       bottomLeftCell = grid[row - 1][col - 1];
@@ -92,27 +95,30 @@ class Gas extends Element {
       targetCell = 1;
     }
 
+    //neighborCells needed for actOnother (ex. temperature distribution)
     let touchingCells = [aboveCell, bottomCell, neighborLeft, neighborRight];
     this.actOnOther(touchingCells);
 
+    //cools element down to base temperature
     if (this.temperature < 0) {
       this.temperature = 0;
     } else {
       this.temperature -= 1;
     }
 
+    //checks to see if this element has been updated for no teleportations and elements being updated multiple times in one tick
     if (this.has_been_updated == false) {
+      //direct bottom check
       if (targetCell == 0) {
         grid[row][col] = 0;
         grid[row][col - gravity] = this;
-      } else if (
+      } else if ( //swap check
         targetCell instanceof Liquid ||
         targetCell instanceof MoveAbleSolid
       ) {
-        //swap cell
         grid[row][col] = targetCell;
         grid[row][col - gravity] = this;
-      } else if (targetCell != 0) {
+      } else if (targetCell != 0) { //diagonals and horizontal checks
         if (bottomLeftCell == 0 && dir < 0) {
           grid[row][col] = 0;
           grid[row - 1][col - 1] = this;

@@ -14,10 +14,9 @@ class Element {
   }
 
   draw(Graphics, row, col, spacer) {
-    // Get the temperature value (assuming it's stored in this.temperature)
     let temperature = this.temperature;
 
-    // Extract the red component from this.color
+    // Extract the red, green, and blue component from this.color
     let rgb = this.color.substring(4, this.color.length - 1).split(","); // Extracting the RGB components
     let red = parseInt(rgb[0].trim()); // Red component
     let green = parseInt(rgb[1].trim());
@@ -53,7 +52,7 @@ class Element {
       }
     }
 
-    // Combine the adjusted red component with the original green and blue components to form the adjusted color
+    //combine the adjusted colors to one rgb value
     let adjustedColor = `rgb(${adjustedRed}, ${adjustedGreen}, ${adjustedBlue})`;
 
     // Draw the rectangle with the adjusted color
@@ -62,17 +61,16 @@ class Element {
     );
   }
 
-  drawEffect(Graphics, row, col, spacer, grid, gridRow, gridCol) {
+  //primarly used for fire effects => draws rectangles with color to the grid even though they aren't an element
+  drawEffect(Graphics, row, col, spacer, grid, gridRow) {
     let randomNumber = Math.random();
     if (randomNumber < 0.5) {
-      // let matrix = Math.floor(Math.random() * (4 - 2 + 1)) + 2;
       let matrix;
       let color;
       randomNumber = Math.random();
       if (randomNumber < 0.5) {
         matrix = Math.floor(Math.random() * (2 - 1 + 1)) + 1;
         color = "rgb(255,165,0)";
-        // color = "rgb(133,1,1)";
       } else {
         matrix = Math.floor(Math.random() * (4 - 2 + 1)) + 2;
         color = "rgb(133,1,1)";
@@ -100,6 +98,8 @@ class Element {
     }
   }
 
+  //takes in the velocity and checks this.velocity amount of space from where the element is at on the 2d grid
+  //directly below the element
   calculateGravity(grid, row, col) {
     let i = 1;
     for (i = 1; i < this.velocity; i++) {
@@ -114,18 +114,16 @@ class Element {
     return i;
   }
 
-  calculateNextPosition(grid, row, col, nextRow, nextCol, elementTocheck) {
-    // for (i = 1; i < nextCol; i++) {
-    //   for(j = 1; j < )
-    // }
-  }
+  
 
+  //heat transfers between the elements
   applyHeat(targetCell) {
     if (targetCell.temperature < this.temperature) {
       targetCell.temperature = Math.floor(this.temperature / 2);
     }
   }
 
+  //base methods if the element doesn't import these
   tempReact() {
     return false;
   }

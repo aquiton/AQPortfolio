@@ -8,6 +8,7 @@ class MoveAbleSolid extends Solid {
     this.hasBeenUpdated = false;
   }
 
+  //checks to see if directly below and left and right diagonals are open to move to that cell
   step(grid, row, col, ROWS) {
     //cell directly under
     let gravity = this.calculateGravity(grid, row, col);
@@ -18,6 +19,7 @@ class MoveAbleSolid extends Solid {
     let rightCell;
     let aboveCell = grid[row][col - 1];
 
+    //in bounds of screen check
     if (row < ROWS - 1) {
       bottomRightCell = grid[row + 1][col + 1];
       rightCell = grid[row + 1][col];
@@ -29,26 +31,26 @@ class MoveAbleSolid extends Solid {
       dir *= -1;
     }
 
+    //neighborcells passed to actOnother function for interactions like temperature
     let touchingCells = [aboveCell, targetCell, leftCell, rightCell];
     this.actOnOther(touchingCells);
 
+    //cools element down to base temperature
     if (this.temperature < 0) {
       this.temperature = 0;
     } else {
       this.temperature -= 1;
     }
 
-    // if (this.life_time == 0) {
-    //   grid[row][col] = 0;
-    // } else {
+    //checks directly under and moves if space is open 
     if (targetCell == 0) {
       grid[row][col] = 0;
       grid[row][col + gravity] = this;
-    } else if (targetCell instanceof Liquid) {
+    } else if (targetCell instanceof Liquid) { //checks to see if it can swap
       //swap cells
       grid[row][col] = targetCell;
       grid[row][col + gravity] = this;
-    } else if (targetCell instanceof Solid) {
+    } else if (targetCell instanceof Solid) { //checks diagonals
       if (bottomLeftCell == 0 && dir < 0) {
         grid[row][col] = 0;
         grid[row - 1][col + 1] = this;
@@ -57,7 +59,6 @@ class MoveAbleSolid extends Solid {
         grid[row + 1][col + 1] = this;
       }
     }
-    // }
   }
 }
 

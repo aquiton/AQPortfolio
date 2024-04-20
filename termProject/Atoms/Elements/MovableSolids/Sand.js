@@ -4,6 +4,8 @@ import Element from "../Element.js";
 class Sand extends MoveAbleSolid {
   constructor() {
     super();
+
+    //random color generator
     let randomNumber = Math.random();
     if (randomNumber < 0.25) {
       this.color = "rgb(168, 143, 100)";
@@ -15,6 +17,8 @@ class Sand extends MoveAbleSolid {
       this.color = "rgb(148, 123, 80)";
     }
   }
+
+  //transfer heat to other cells
   actOnOther(touchingCells) {
     touchingCells.forEach((cell) => {
       if (cell instanceof Element) {
