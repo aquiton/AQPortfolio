@@ -6,7 +6,7 @@ import Stone from "./Elements/Solids/Stone.js";
 import Air from "./Elements/Gas/Air.js";
 import Ember from "./Elements/MovableSolids/Embers.js";
 import Dust from "./Elements/MovableSolids/Dust.js";
-import Gravel from "./Elements/MovableSolids/Gravel.js";
+
 import Fire from "./Elements/Gas/Fire.js";
 import Wood from "./Elements/Solids/Wood.js";
 import Soil from "./Elements/MovableSolids/Soil.js";
