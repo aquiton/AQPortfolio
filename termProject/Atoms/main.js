@@ -9,7 +9,6 @@ import Dust from "./Elements/MovableSolids/Dust.js";
 import Fire from "./Elements/Gas/Fire.js";
 import Wood from "./Elements/Solids/Wood.js";
 import Soil from "./Elements/MovableSolids/Soil.js";
-import { Color, WebGLRenderer } from "pixi.js";
 
 const app = new PIXI.Application();
 
